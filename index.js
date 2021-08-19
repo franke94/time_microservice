@@ -13,7 +13,7 @@ app.get('/', (req,res) =>{
     res.sendFile(path.join(__dirname,"./index.html") );
 });
 
-
+//TEST
 
 app.get('/some-command', (req,res) =>{
     res.sendStatus(200);  //Sendet einen Status zurück
