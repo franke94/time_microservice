@@ -14,22 +14,21 @@ app.get('/', (req,res) =>{
     res.sendFile(path.join(__dirname,"./index.html") );
 });
 
+app.get('/time', (req,res) => {
+    axios.get('http://worldtimeapi.org/api/ip')
+    .then(response => {
+        res.json(response.data.datetime);
+    })
+})
+
 app.get('/timezones', (req, res) => {
     res.sendFile(path.join(__dirname,"./timezones.html") );
-    axios.get('http://worldtimeapi.org/api/timezone')
-    .then(response => {
-        //res.json(response.data); -> Response an die webseite
-        //Alle timezones auslesen
-        for(var i = 0; i < 5; i++){   // eigentlich i < res.length
-            console.log(response.data[i]);
-            }
-                
-    })
+   
 });
 
 app.get('/regions', (req, res) => {
     //show all regions
-    res.sendFile(path.join(__dirname,"./timezones.html") );
+    //res.sendFile(path.join(__dirname,"./timezones.html") );
     axios.get('http://worldtimeapi.org/api/timezone')
     .then(response => {
         var regions = [];
@@ -41,12 +40,12 @@ app.get('/regions', (req, res) => {
                 region= regex.exec(response.data[i])[0];
             }
             catch{region = response.data[i];}
-            
+
             if(! regions.includes(region)){
                 regions.push(region);
             }
         }
-    console.log(regions);
+    res.json(regions);
     })
     
 });

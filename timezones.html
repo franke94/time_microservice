@@ -9,10 +9,14 @@
 <body>
     <h1>All timezones</h1>
 
-    
-
     <script>
-        
+        window.onload = () =>{
+            fetch('/regions')
+            .then(response => response.json())
+            .then(regions => {
+                console.log(regions);
+            })
+        }        
     </script>
 
 </body>
